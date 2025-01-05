@@ -3,19 +3,96 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --appbar-height: 64px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@font-face {
+  font-family: "vazir";
+  src: url("/fonts/vazirmatn/VazirmatnLight.woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: "vazir";
+  src: url("/fonts/vazirmatn/VazirmatnRegular.woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: "vazir";
+  src: url("/fonts/vazirmatn/VazirmatnMedium.woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: "vazir";
+  src: url("/fonts/vazirmatn/VazirmatnBold.woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: "vazir";
+  src: url("/fonts/vazirmatn/VazirmatnExtraBold.woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: auto;
+}
+
+* {
+  font-weight: 400;
+  font-family: "vazir", sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+html body {
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  direction: rtl;
+}
+
+.text-caption {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 2.17;
+}
+
+/* it used in authentication list */
+.divider:not(:empty) {
+  gap: 0rem;
+}
+
+.custom-divider,
+.custom-divider:before,
+.custom-divider:after {
+  height: 1px !important;
+}
+
+.custom-divider-horizontal,
+.custom-divider-horizontal:before,
+.custom-divider-horizontal:after {
+  width: 1px !important;
 }
