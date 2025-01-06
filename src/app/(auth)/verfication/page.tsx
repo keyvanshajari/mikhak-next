@@ -87,77 +87,63 @@ const Page = () => {
   };
 
   return (
-    <CentralContainer>
-      <div className="md:border-2 p-8 rounded-2xl w-full max-w-[500px] ">
-        <div className="w-full mb-11 my-4 flex flex-col items-center justify-center">
-          <Image
-            alt="logo-mikhak"
-            src={"/mikhak-logo-primary.png"}
-            height={80}
-            width={212}
-            style={{
-              width: "auto",
-              height: "80px",
-            }}
+    <div className="flex flex-col items-center w-full">
+      <h1 className="font-bold font-custom text-2xl mt-6 mb-11">ورود به میخک</h1>
+      <form className="w-full flex flex-col items-center justify-center" onSubmit={handleSubmit}>
+        <div className="w-full md:w-96 flex-col flex ">
+          <BasicInput
+            key={"phone"}
+            title={"شماره موبایل:"}
+            type="tel"
+            name="phone"
+            placeholder="09xxxxxxxx"
+            disabled={true}
+            dir="ltr"
+            value={mobile?.toString()}
+            className="text-center mb-4"
           />
-          <h1 className="font-bold font-custom text-2xl mt-6">ورود به میخک</h1>
-        </div>
-        <form className="w-full flex flex-col items-center justify-center" onSubmit={handleSubmit}>
-          <div className="w-full md:w-96 flex-col flex ">
+
+          {appType === APP_TYPE.moda && (
             <BasicInput
-              key={"phone"}
-              title={"شماره موبایل:"}
+              key={"nationalCode"}
+              title={"کد ملی:"}
+              name="nationalCode"
               type="tel"
-              name="phone"
-              placeholder="09xxxxxxxx"
+              placeholder="1234567890"
+              value={nationalCode?.toString()}
               disabled={true}
               dir="ltr"
-              value={mobile?.toString()}
-              className="text-center mb-4"
+              className="text-center"
             />
+          )}
 
-            {appType === APP_TYPE.moda && (
-              <BasicInput
-                key={"nationalCode"}
-                title={"کد ملی:"}
-                name="nationalCode"
-                type="tel"
-                placeholder="1234567890"
-                value={nationalCode?.toString()}
-                disabled={true}
-                dir="ltr"
-                className="text-center"
-              />
-            )}
-
-            <div className="w-full flex justify-end">
-              <TextButton buttonSize={ButtonSize.small} onClick={changePhone}>
-                ویرایش شماره
-              </TextButton>
-            </div>
-
-            <BasicInput
-              title={"کد تایید:"}
-              name="otp"
-              maxLength={6}
-              placeholder="_ _ _ _"
-              dir="ltr"
-              className="text-center mt-2"
-            />
-
-            <div className={`w-full mt-10 flex flex-col`}>
-              <FillButton
-                type="submit"
-                className={"w-full"}
-                loading={authState.verifyOtpState == FETCHING_STATES.FETCHING}
-              >
-                تایید
-              </FillButton>
-            </div>
+          <div className="w-full flex justify-end">
+            <TextButton buttonSize={ButtonSize.small} onClick={changePhone}>
+              ویرایش شماره
+            </TextButton>
           </div>
-        </form>
-      </div>
-    </CentralContainer>
+
+          <BasicInput
+            title={"کد تایید:"}
+            name="otp"
+            maxLength={6}
+            placeholder="_ _ _ _"
+            dir="ltr"
+            className="text-center mt-2"
+          />
+
+          <div className={`w-full mt-10 flex flex-col`}>
+            <FillButton
+              type="submit"
+              className={"w-full"}
+              loading={authState.verifyOtpState == FETCHING_STATES.FETCHING}
+            >
+              تایید
+            </FillButton>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 

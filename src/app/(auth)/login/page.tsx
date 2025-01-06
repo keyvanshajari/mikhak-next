@@ -16,14 +16,10 @@ import { countryList } from "@/common/constants/country-list";
 import { APP_TYPE } from "@/common/constants/constants";
 import RadioGroup from "@/components/radio-group";
 import { getAppType, setAppType as setAppTypeStorage } from "@/common/utils/storage";
-
-const pad = (n: number) => {
-  return n < 10 ? "0" + n : n;
-};
+import OutlinedButton from "@/components/buttons/outlined-button";
 
 const Page = () => {
   const router = useRouter();
-  const params = useSearchParams();
   const region = countryList[0];
 
   const dispatch = useDispatch<AppDispatch>();
@@ -32,6 +28,10 @@ const Page = () => {
   const [phone, setPhone] = useState("");
   const [nationalCode, setNationalCode] = useState("");
   const [appType, setAppType] = useState(APP_TYPE.moda);
+
+  const onTapRegister = () => {
+    router.push(Routes.registerPage);
+  };
 
   useEffect(() => {
     setAppType(getAppType());
@@ -91,90 +91,80 @@ const Page = () => {
   };
 
   return (
-    <CentralContainer>
-      <div className="md:border-2 p-8 rounded-2xl w-full max-w-[500px]">
-        <div className="w-full mb-11 my-4 flex flex-col items-center justify-center">
-          <Image
-            alt="logo-mikhak"
-            src={"/mikhak-logo-primary.png"}
-            height={80}
-            width={212}
-            style={{
-              width: "auto",
-              height: "80px",
-            }}
+    <div className="flex flex-col items-center w-full">
+      <h1 className="font-bold font-custom text-2xl mt-6 mb-11">ورود به میخک</h1>
+
+      <form className="w-full flex flex-col items-center justify-center" onSubmit={handleSubmit}>
+        <div className="w-full md:w-96 flex-col flex ">
+          <BasicInput
+            key={"phone"}
+            title={"شماره موبایل:"}
+            type="tel"
+            name="phone"
+            placeholder="09xxxxxxxx"
+            dir="ltr"
+            className="text-center mb-4"
           />
-          <h1 className="font-bold font-custom text-2xl mt-6">ورود به میخک</h1>
-        </div>
-        <form className="w-full flex flex-col items-center justify-center" onSubmit={handleSubmit}>
-          <div className="w-full md:w-96 flex-col flex ">
+
+          {appType === APP_TYPE.moda && (
             <BasicInput
-              key={"phone"}
-              title={"شماره موبایل:"}
+              key={"nationalCode"}
+              title={"کد ملی:"}
+              name="nationalCode"
               type="tel"
-              name="phone"
-              placeholder="09xxxxxxxx"
+              placeholder="1234567890"
               dir="ltr"
               className="text-center mb-4"
             />
+          )}
 
-            {appType === APP_TYPE.moda && (
-              <BasicInput
-                key={"nationalCode"}
-                title={"کد ملی:"}
-                name="nationalCode"
-                type="tel"
-                placeholder="1234567890"
-                dir="ltr"
-                className="text-center mb-4"
-              />
-            )}
+          <RadioGroup<number>
+            items={[
+              {
+                label: "ورود بیمار",
+                value: 2,
+              },
+              {
+                label: "ورود پزشک",
+                value: 1,
+              },
+            ]}
+            onChange={(value) => {
+              setAppType(value);
+            }}
+            selectedValue={appType}
+          />
 
-            <RadioGroup<number>
-              items={[
-                {
-                  label: "ورود بیمار",
-                  value: 2,
-                },
-                {
-                  label: "ورود پزشک",
-                  value: 1,
-                },
-              ]}
-              onChange={(value) => {
-                setAppType(value);
-              }}
-              selectedValue={appType}
-            />
-
-            <div
-              className={`w-full mt-10 flex flex-col
+          <div
+            className={`w-full mt-10 flex flex-col
             `}
+          >
+            <FillButton
+              type="submit"
+              className={"w-full"}
+              loading={authState.getOtpState == FETCHING_STATES.FETCHING}
             >
-              <FillButton
-                type="submit"
-                className={"w-full"}
-                loading={authState.getOtpState == FETCHING_STATES.FETCHING}
-              >
-                ورود
-              </FillButton>
+              ورود
+            </FillButton>
+            <OutlinedButton onClick={onTapRegister} className={"w-full mt-4"}>
+              ثبت‌نام
+            </OutlinedButton>
 
-              <p className="text-caption text-neutral-9-light mt-4 text-center">
-                ورود شما به معنای پذیرش
-                <a className="mx-1 inline-block text-primary-4-light" href="/page/terms/">
-                  شرایط میخک
-                </a>
-                و
-                <a className="mx-1 inline-block text-primary-4-light" href="/page/privacy/">
-                  قوانین حریم‌خصوصی
-                </a>
-                است
-              </p>
-            </div>
+            <p className="text-caption text-neutral-9-light mt-4 text-center">
+              ورود شما به معنای پذیرش
+              <a className="mx-1 inline-block text-primary-4-light" href="/page/terms/">
+                شرایط میخک
+              </a>
+              و
+              <a className="mx-1 inline-block text-primary-4-light" href="/page/privacy/">
+                قوانین حریم‌خصوصی
+              </a>
+              است
+            </p>
           </div>
-        </form>
-      </div>
-    </CentralContainer>
+        </div>
+      </form>
+    </div>
   );
 };
 
