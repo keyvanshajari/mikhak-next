@@ -63,7 +63,7 @@ export const UsernameWithOtpSchemaError = Joi.object({
     .messages({
       "any.invalid": ErrorMessages.username.notValid,
     }),
-  otp: Joi.number().required().min(100000).max(999999).message(ErrorMessages.otp),
+  otp: Joi.number().required().min(1000).max(9999).message(ErrorMessages.otp),
 });
 
 export const PhoneSchemaError = Joi.object({
@@ -84,7 +84,7 @@ export const EmailSchemaError = Joi.object({
 });
 
 export const OtpSchemaError = Joi.object({
-  otp: Joi.number().required().min(100000).max(999999).messages({
+  otp: Joi.number().required().min(1000).max(9999).messages({
     "number.min": ErrorMessages.otp,
     "number.max": ErrorMessages.otp,
     "number.required": ErrorMessages.otp,
@@ -98,7 +98,7 @@ export const PhoneAndOtpSchemaError = Joi.object({
     "any.invalid": ErrorMessages.phone.notValid,
     "string.pattern.base": ErrorMessages.phone.notValid,
   }),
-  otp: Joi.number().required().min(100000).max(999999).message(ErrorMessages.otp),
+  otp: Joi.number().required().min(1000).max(9999).message(ErrorMessages.otp),
 });
 
 export const EmailAndOtpSchemaError = Joi.object({
@@ -107,7 +107,7 @@ export const EmailAndOtpSchemaError = Joi.object({
     "any.required": ErrorMessages.email.required,
     "string.pattern.base": ErrorMessages.email.notValid,
   }),
-  otp: Joi.number().required().min(100000).max(999999).message(ErrorMessages.otp),
+  otp: Joi.number().required().min(1000).max(9999).message(ErrorMessages.otp),
 });
 
 export const PersonalInformationSchemaError = Joi.object({
@@ -129,7 +129,7 @@ export const PersonalInformationSchemaError = Joi.object({
   }),
 });
 
-export const IrNationalCodeValidator = (val: string): boolean => {
+export const isValidIrNationalCode = (val: string): boolean => {
   var allDigitEqual = [
     "0000000000",
     "1111111111",

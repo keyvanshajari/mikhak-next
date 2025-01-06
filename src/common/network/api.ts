@@ -1,8 +1,7 @@
 import axios from "axios";
 import { ObjectStringAny, ObjectStringString } from "../../types/types";
 import { IClientResponse } from "../../types/response-type";
-import { signOut } from "next-auth/react";
-import { BASE_URL_DEV, BASE_URL_PROD, isDev } from "../config/config";
+import { apiKey, BASE_URL_DEV, BASE_URL_PROD, isDev } from "../config/config";
 
 export interface requestOptions {
   method: "post" | "get" | "put" | "patch" | "delete";
@@ -25,7 +24,7 @@ class API<T> {
 
     try {
       const config: ObjectStringAny = {
-        url: `api${url}`,
+        url: `${url}`,
         method: options.method,
       };
 
@@ -36,19 +35,20 @@ class API<T> {
       // Add authorization header if there is access token in the cookies
       if (options.headers) config.headers = { ...config.headers, ...options.headers };
 
+      config.headers = { ...config.headers, XApiKey: apiKey };
       const response = await axios.request(config);
 
-      return { data: response.data.data, message: response.data.message, status: response.status };
+      return { data: response.data, message: response.data.message, status: response.status };
     } catch (error: any) {
       if (error?.response?.status === 401) {
         try {
-          signOut();
+          // signOut();
         } catch (error) {
           console.log("error 401", error);
         }
       }
       const e: IClientResponse<T> = {
-        data: error?.response?.data?.data,
+        data: error?.response?.data,
         message: error?.response?.data?.message,
         status: error?.response?.status,
       };

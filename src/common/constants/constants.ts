@@ -4,3 +4,8 @@ export const MobileDeviceRegex = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|W
 
 export const scrollbarStyle =
   " no-scrollbar  scrollbar-thin scrollbar-thumb-neutral-3-light scrollbar-track-gray-300 ";
+
+export const APP_TYPE = {
+  oda: 1,
+  moda: 2,
+};

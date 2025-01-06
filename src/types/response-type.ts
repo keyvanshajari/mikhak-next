@@ -16,7 +16,7 @@ export interface ISuccessResponseRequest {
   message?: string;
 }
 export interface IClientResponse<T> {
-  data: T;
+  data: T | null;
   status?: number | null;
   message?: null | string;
 }
