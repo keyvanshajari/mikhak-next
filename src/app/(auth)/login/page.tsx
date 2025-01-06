@@ -31,7 +31,11 @@ const Page = () => {
 
   const [phone, setPhone] = useState("");
   const [nationalCode, setNationalCode] = useState("");
-  const [appType, setAppType] = useState(getAppType());
+  const [appType, setAppType] = useState(APP_TYPE.moda);
+
+  useEffect(() => {
+    setAppType(getAppType());
+  }, []);
 
   useEffect(() => {
     setAppTypeStorage(appType);
@@ -42,7 +46,7 @@ const Page = () => {
       case FETCHING_STATES.READY:
         router.push(
           `${Routes.verficaionPage}?mobile=${phone}${
-            appType == APP_TYPE.moda && `&nationalCode=${nationalCode}`
+            appType == APP_TYPE.moda ? `&nationalCode=${nationalCode}` : ""
           }`
         );
         break;
@@ -60,7 +64,6 @@ const Page = () => {
       const formData = new FormData(event.currentTarget);
 
       const phoneInput = formData.get("phone")!.toString();
-      const nationalCodeInput = formData.get("nationalCode")!.toString();
       const number = phoneUtil.parse(phoneInput, region.code);
 
       const { error } = PhoneSchemaError.validate({ phone: number });
@@ -68,18 +71,20 @@ const Page = () => {
         toast.error(error.details[0].message);
         return;
       }
+      setPhone(phoneInput);
 
       if (appType === APP_TYPE.moda) {
+        const nationalCodeInput = formData.get("nationalCode")!.toString();
         const isValid = isValidIrNationalCode(nationalCodeInput);
         if (!isValid) {
           toast.error("کد ملی را وارد کنید");
           return;
         }
+        setNationalCode(nationalCodeInput);
+        dispatch(fetchOtp({ mobile: phoneInput, nationalCode: nationalCodeInput, type: appType }));
+      } else {
+        dispatch(fetchOtp({ mobile: phoneInput, type: appType }));
       }
-
-      setPhone(phoneInput);
-      setNationalCode(nationalCodeInput);
-      dispatch(fetchOtp({ mobile: phoneInput, nationalCode: nationalCodeInput, type: appType }));
     } catch (error: any) {
       console.log(error);
     }
@@ -87,7 +92,7 @@ const Page = () => {
 
   return (
     <CentralContainer>
-      <div className="border-2 p-8 rounded-2xl">
+      <div className="md:border-2  p-8 rounded-2xl">
         <div className="flex flex-col items-center justify-center mb-11 my-4">
           <Image
             alt="logo-mikhak"
@@ -149,7 +154,7 @@ const Page = () => {
               <FillButton
                 type="submit"
                 className={"w-full"}
-                loading={authState.getOtpState == FETCHING_STATES.UPDATING}
+                loading={authState.getOtpState == FETCHING_STATES.FETCHING}
               >
                 ورود
               </FillButton>

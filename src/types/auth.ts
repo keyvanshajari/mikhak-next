@@ -1,5 +1,5 @@
 export type UserModel = {
-  id: string;
+  userId: string;
   phoneNumber: string;
   fullname: string;
   patientCode: string | null;

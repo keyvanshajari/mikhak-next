@@ -5,11 +5,13 @@ import Routes from "@/common/constants/routes";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import TextButton from "../buttons/text-button";
-import CustomLoader from "../loader";
 import { ButtonSize } from "../buttons/button";
+import { useIsLoggedIn } from "@/common/hooks/isloggedin";
 
 export default function Navbar() {
   const router = useRouter();
+  const isLoggedIn = useIsLoggedIn();
+
   return (
     <nav
       className={
@@ -27,23 +29,17 @@ export default function Navbar() {
           />
         </Link>
 
-        <div className={"flex flex-row"}>
-          {/* {session.status == "authenticated" ? ( */}
+        {isLoggedIn && (
           <TextButton
-            buttonSize={ButtonSize.xlarge}
-            className="text-white !p-0"
+            buttonSize={ButtonSize.large}
+            className="text-white bg-neutral-3-light bg-opacity-30  !rounded-full"
             onClick={() => {
               router.push(Routes.profile);
             }}
           >
-            <FiUser className="size-7" />
+            <FiUser className="size-5" />
           </TextButton>
-          {/* ) : session.status == "loading" ? ( */}
-          {/* <CustomLoader className={" mx-8 "} /> */}
-          {/* ) : ( */}
-          <></>
-          {/* )} */}
-        </div>
+        )}
       </div>
     </nav>
   );

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CentralContainer from "@/components/container/central-container";
 import Image from "next/image";
 import FillButton from "@/components/buttons/fill-button";
@@ -27,10 +27,15 @@ const Page = () => {
   const searchParams = useSearchParams();
   const mobile = searchParams.get("mobile");
   const nationalCode = searchParams.get("nationalCode");
-  const appType = getAppType();
+  const [appType, setAppType] = useState(APP_TYPE.moda);
 
   const dispatch = useDispatch<AppDispatch>();
   const authState = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    const _appType = getAppType();
+    setAppType(_appType);
+  }, []);
 
   useEffect(() => {
     switch (authState.verifyOtpState) {
@@ -53,7 +58,7 @@ const Page = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      if (!mobile || !nationalCode) {
+      if (!mobile || (appType == APP_TYPE.moda && (!nationalCode || !mobile))) {
         toast.error("خطا در ورود لطفا دوباره کد را دریافت کنید");
         router.replace(Routes.loginPage);
         return;
@@ -73,7 +78,7 @@ const Page = () => {
           mobile,
           type: appType,
           otpCode: otp,
-          nationalCode,
+          ...(nationalCode && { nationalCode }),
         })
       );
     } catch (error: any) {
@@ -83,7 +88,7 @@ const Page = () => {
 
   return (
     <CentralContainer>
-      <div className="border-2 p-8 rounded-2xl">
+      <div className="md:border-2 p-8 rounded-2xl">
         <div className="flex flex-col items-center justify-center mb-11 my-4">
           <Image
             alt="logo-mikhak"
@@ -144,7 +149,7 @@ const Page = () => {
               <FillButton
                 type="submit"
                 className={"w-full"}
-                loading={authState.verifyOtpState == FETCHING_STATES.UPDATING}
+                loading={authState.verifyOtpState == FETCHING_STATES.FETCHING}
               >
                 تایید
               </FillButton>

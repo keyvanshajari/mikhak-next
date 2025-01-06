@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { FETCHING_STATES } from "@/types/response-type";
 import api from "@/common/network/api";
-import { setLocalStorageData } from "@/common/utils/storage";
+import { setUserLocalStorage } from "@/common/utils/storage";
 import { UserModel } from "@/types/auth";
 import { ObjectStringAny } from "@/types/types";
 
@@ -67,43 +67,47 @@ const initialState: {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    verifyUser(state, { payload }) {
-      console.log(payload);
-      state.user = payload;
-      setLocalStorageData("user", JSON.stringify(payload));
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchOtp.pending, (state) => {
         state.getOtpState = FETCHING_STATES.FETCHING;
+        state.verifyOtpState = FETCHING_STATES.IDLE;
       })
-      .addCase(fetchOtp.fulfilled, (state, { payload }) => {
+      .addCase(fetchOtp.fulfilled, (state) => {
         state.getOtpState = FETCHING_STATES.READY;
       })
-      .addCase(fetchOtp.rejected, (state, { error }) => {
+      .addCase(fetchOtp.rejected, (state) => {
         state.getOtpState = FETCHING_STATES.FAILED;
       });
 
     builder
       .addCase(verifyOtp.pending, (state) => {
         state.verifyOtpState = FETCHING_STATES.FETCHING;
+        state.getOtpState = FETCHING_STATES.IDLE;
       })
       .addCase(verifyOtp.fulfilled, (state, { payload }) => {
         if ((payload as ObjectStringAny)["isSuccess"]) {
           state.verifyOtpState = FETCHING_STATES.READY;
-          verifyUser(payload);
+          const user = payload as UserModel;
+          setUserLocalStorage({
+            userId: user.userId,
+            clinicId: user.clinicId,
+            clinicName: user.clinicName,
+            fullname: user.fullname,
+            patientCode: user.patientCode,
+            phoneNumber: user.phoneNumber,
+          });
         } else {
           state.verifyOtpState = FETCHING_STATES.FAILED;
         }
       })
-      .addCase(verifyOtp.rejected, (state, { error, payload }) => {
+      .addCase(verifyOtp.rejected, (state) => {
         state.verifyOtpState = FETCHING_STATES.FAILED;
       });
   },
 });
 
-export const { verifyUser } = authSlice.actions;
+export const {} = authSlice.actions;
 
 export default authSlice.reducer;
