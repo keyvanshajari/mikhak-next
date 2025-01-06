@@ -88,8 +88,8 @@ const Page = () => {
 
   return (
     <CentralContainer>
-      <div className="md:border-2 p-8 rounded-2xl">
-        <div className="flex flex-col items-center justify-center mb-11 my-4">
+      <div className="md:border-2 p-8 rounded-2xl w-full max-w-[500px] ">
+        <div className="w-full mb-11 my-4 flex flex-col items-center justify-center">
           <Image
             alt="logo-mikhak"
             src={"/mikhak-logo-primary.png"}
@@ -100,9 +100,9 @@ const Page = () => {
               height: "80px",
             }}
           />
-          <h1 className="font-bold font-custom text-۲xl mt-6">ورود به میخک</h1>
+          <h1 className="font-bold font-custom text-2xl mt-6">ورود به میخک</h1>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form className="w-full flex flex-col items-center justify-center" onSubmit={handleSubmit}>
           <div className="w-full md:w-96 flex-col flex ">
             <BasicInput
               key={"phone"}

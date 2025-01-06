@@ -6,6 +6,12 @@
   --appbar-height: 64px;
 }
 
+@media (min-width: 720px) {
+  :root {
+    --appbar-height: 72px;
+  }
+}
+
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;

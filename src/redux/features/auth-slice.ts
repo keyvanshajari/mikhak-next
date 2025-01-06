@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { FETCHING_STATES } from "@/types/response-type";
 import api from "@/common/network/api";
-import { setUserLocalStorage } from "@/common/utils/storage";
 import { UserModel } from "@/types/auth";
 import { ObjectStringAny } from "@/types/types";
+import { setUserLocalStorage } from "@/common/utils/cookie-manager";
 
 export const fetchOtp = createAsyncThunk(
   "fetchOtp",

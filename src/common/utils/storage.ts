@@ -1,4 +1,3 @@
-import { UserModel } from "@/types/auth";
 import { APP_TYPE } from "../constants/constants";
 
 //LocalStorage
@@ -18,17 +17,3 @@ export const removeLocalStorageData = (key: string) => localStorage.removeItem(k
 export const setAppType = (type: number) => setLocalStorageData("app_type", `${type}`);
 export const getAppType = (): number =>
   parseInt(getLocalStorageData("app_type") ?? `${APP_TYPE.moda}`);
-
-//User storage
-export const getUserLocalStorage = (): UserModel | null => {
-  const user = getLocalStorageData("user");
-  if (user) return JSON.parse(user);
-
-  return null;
-};
-export const setUserLocalStorage = (value: UserModel) => {
-  console.log(value);
-
-  setLocalStorageData("user", JSON.stringify(value));
-};
-export const removeUserLocalStorage = () => localStorage.removeItem("user");
