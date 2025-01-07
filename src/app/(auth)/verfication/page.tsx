@@ -16,10 +16,6 @@ import { APP_TYPE } from "@/common/constants/constants";
 import { getAppType } from "@/common/utils/cookie-manager";
 import { verifyOtp } from "@/redux/features/auth-slice";
 
-const pad = (n: number) => {
-  return n < 10 ? "0" + n : n;
-};
-
 const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();

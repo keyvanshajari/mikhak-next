@@ -112,7 +112,7 @@ const Page = () => {
               type="tel"
               placeholder="1234567890"
               dir="ltr"
-              className="text-center mb-4"
+              className="text-center mb"
             />
           )}
 
@@ -147,18 +147,6 @@ const Page = () => {
             <OutlinedButton onClick={onTapRegister} className={"w-full mt-4"}>
               ثبت‌ نام
             </OutlinedButton>
-
-            <p className="text-caption text-neutral-9-light mt-4 text-center">
-              ورود شما به معنای پذیرش
-              <a className="mx-1 inline-block text-primary-4-light" href={Routes.termsPage}>
-                شرایط میخک
-              </a>
-              و
-              <a className="mx-1 inline-block text-primary-4-light" href={Routes.termsPage}>
-                قوانین حریم‌خصوصی
-              </a>
-              است
-            </p>
           </div>
         </div>
       </form>

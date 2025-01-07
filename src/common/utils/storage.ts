@@ -1,3 +1,4 @@
+import "client-only";
 export const getLocalStorageData = (key: string): string | null => {
   try {
     if (typeof window !== "undefined" && window.localStorage) {

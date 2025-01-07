@@ -102,3 +102,29 @@ html body {
 .custom-divider-horizontal:after {
   width: 1px !important;
 }
+
+.zm-DaysButton[data-selected="true"],
+.zm-MonthPickerButton[data-selected="true"],
+.zm-YearPickerButton[data-selected="true"],
+.zm-DaysButton:active,
+.zm-MonthPickerButton:active,
+.zm-YearPickerButton:active {
+  background-color: #5242a2 !important;
+}
+
+.zm-Header {
+  background-color: #e0d9f5 !important;
+  border-bottom: 2px solid #a28de1 !important;
+}
+
+.zm-IconNextButton,
+.zm-IconPrevButton,
+.zm-MonthYearButton {
+  color: #5242a2 !important;
+}
+
+.zm-IconNextButton:hover,
+.zm-IconPrevButton:hover,
+.zm-MonthYearButton:hover {
+  background-color: #c1b3eb !important;
+}

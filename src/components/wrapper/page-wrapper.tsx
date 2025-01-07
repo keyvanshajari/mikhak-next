@@ -25,7 +25,7 @@ export default function PageWrapper({
   return (
     <div className={className + " w-full h-full flex flex-col items-center pt-[--appbar-height]"}>
       {pageTitle && (
-        <div className="w-full bg-primary-6-light h-20 text-white flex justify-center items-center">
+        <div className="w-full px-4 md:px-0 bg-primary-6-light h-20 text-white flex justify-center items-center">
           <div className="container h-20 text-2xl font-bold flex items-center">{pageTitle}</div>
         </div>
       )}
@@ -42,7 +42,7 @@ export default function PageWrapper({
             }
             dir="ltr"
           >
-            <div dir="rtl" className="w-full">
+            <div dir="rtl" className="w-full px-4 md:px-0">
               {children}
             </div>
           </div>

@@ -15,6 +15,7 @@
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
+    "client-only": "^0.0.1",
     "cookies": "^0.9.1",
     "google-libphonenumber": "^3.2.40",
     "inversify": "^6.2.1",
@@ -32,6 +33,7 @@
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
     "reflect-metadata": "^0.2.2",
+    "server-only": "^0.0.1",
     "tw-elements-react": "^1.0.0-alpha-end",
     "zaman": "^2.1.1"
   },

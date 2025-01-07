@@ -4,8 +4,6 @@ import { APP_TYPE } from "../constants/constants";
 
 export async function getCookie(key: string): Promise<string | undefined> {
   const res = await Cookies.get(key);
-  console.log(res);
-
   return res;
 }
 
@@ -20,8 +18,6 @@ export async function deleteCookie(key: string) {
 export const USER_COOKIE_NAME = "user";
 export const getUserLocal = async (): Promise<UserModel | null> => {
   const user = await getCookie(USER_COOKIE_NAME);
-  console.log(user);
-
   if (user) return JSON.parse(user);
   return null;
 };
