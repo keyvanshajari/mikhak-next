@@ -4,10 +4,10 @@ import Image from "next/image";
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <section
-      className={`bg-background-light dark:bg-background-dark h-dvh overflow-y-auto overflow-x-clip  w-full`}
+      className={`bg-primary dark:bg-background-dark h-dvh overflow-y-auto overflow-x-clip w-full px-4`}
     >
       <CentralContainer>
-        <div className="md:border-2 p-8 rounded-2xl w-full max-w-[500px] ">
+        <div className="border-2 bg-background-light p-8 rounded-2xl w-full max-w-[500px] ">
           <div className="w-full mt-4 flex flex-col items-center justify-center">
             <Image
               alt="logo-mikhak"

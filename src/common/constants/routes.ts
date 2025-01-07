@@ -9,7 +9,8 @@ class Routes {
   static newContact = `${this.rootPage}new-contact`;
 
   //Static Routes
-  static termsPage = `${this.rootPage}terms`;
+  static staticPage = `${this.rootPage}static/`;
+  static termsPage = `${this.staticPage}terms`;
 }
 
 export default Routes;

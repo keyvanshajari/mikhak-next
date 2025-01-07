@@ -11,6 +11,11 @@ export default async function middleware(req: NextRequest) {
   if (cleanPathName.startsWith("/_next")) {
     return response;
   }
+
+  if (staticPages.some((ext) => cleanPathName.startsWith(ext))) {
+    return response;
+  }
+
   if (staticFileExtensions.some((ext) => cleanPathName.endsWith(ext))) {
     return response;
   }
@@ -34,5 +39,6 @@ export default async function middleware(req: NextRequest) {
   return NextResponse.redirect(new URL(Routes.loginPage, req.url));
 }
 
+const staticPages = ["/static"];
 const authRoute = ["/login", "/register", "/verfication"];
 const staticFileExtensions = [".css", ".ico", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".woff"];
