@@ -17,6 +17,7 @@ import { APP_TYPE } from "@/common/constants/constants";
 import RadioGroup from "@/components/radio-group";
 import { getAppType, setAppType as setAppTypeStorage } from "@/common/utils/storage";
 import OutlinedButton from "@/components/buttons/outlined-button";
+import { Router } from "next/router";
 
 const Page = () => {
   const router = useRouter();
@@ -147,16 +148,16 @@ const Page = () => {
               ورود
             </FillButton>
             <OutlinedButton onClick={onTapRegister} className={"w-full mt-4"}>
-              ثبت‌نام
+              ثبت‌ نام
             </OutlinedButton>
 
             <p className="text-caption text-neutral-9-light mt-4 text-center">
               ورود شما به معنای پذیرش
-              <a className="mx-1 inline-block text-primary-4-light" href="/page/terms/">
+              <a className="mx-1 inline-block text-primary-4-light" href={Routes.termsPage}>
                 شرایط میخک
               </a>
               و
-              <a className="mx-1 inline-block text-primary-4-light" href="/page/privacy/">
+              <a className="mx-1 inline-block text-primary-4-light" href={Routes.termsPage}>
                 قوانین حریم‌خصوصی
               </a>
               است

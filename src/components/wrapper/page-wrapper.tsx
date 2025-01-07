@@ -11,17 +11,24 @@ export default function PageWrapper({
   rightBoxClassName,
   leftBox,
   leftBoxClassName,
+  pageTitle,
 }: {
-  className?: String | "";
+  className?: string | "";
   children?: React.ReactNode;
-  mainBoxClassName?: String | "";
+  mainBoxClassName?: string | "";
   rightBox?: React.ReactNode;
-  rightBoxClassName?: String | "";
+  rightBoxClassName?: string | "";
   leftBox?: React.ReactNode;
-  leftBoxClassName?: String | "";
+  leftBoxClassName?: string | "";
+  pageTitle?: string;
 }) {
   return (
-    <div className={className + " w-full h-full flex justify-center "}>
+    <div className={className + " w-full h-full flex flex-col items-center pt-[--appbar-height]"}>
+      {pageTitle && (
+        <div className="w-full bg-primary-6-light h-20 text-white flex justify-center items-center">
+          <div className="container h-20 text-2xl font-bold flex items-center">{pageTitle}</div>
+        </div>
+      )}
       <div className="container">
         <div className=" w-full flex flex-row h-full">
           {rightBox && (
