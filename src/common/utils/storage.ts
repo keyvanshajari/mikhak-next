@@ -1,6 +1,3 @@
-import { APP_TYPE } from "../constants/constants";
-
-//LocalStorage
 export const getLocalStorageData = (key: string): string | null => {
   try {
     if (typeof window !== "undefined" && window.localStorage) {
@@ -13,7 +10,3 @@ export const getLocalStorageData = (key: string): string | null => {
 };
 export const setLocalStorageData = (key: string, value: string) => localStorage.setItem(key, value);
 export const removeLocalStorageData = (key: string) => localStorage.removeItem(key);
-
-export const setAppType = (type: number) => setLocalStorageData("app_type", `${type}`);
-export const getAppType = (): number =>
-  parseInt(getLocalStorageData("app_type") ?? `${APP_TYPE.moda}`);

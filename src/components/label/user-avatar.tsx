@@ -34,7 +34,7 @@ export default function UserAvatar({
         backgroundColor: ColorHelper.stringToColor(name),
       }}
     >
-      {(name ?? "R").at(0)}
+      {(name ?? "م").at(0)}
     </div>
   );
 }

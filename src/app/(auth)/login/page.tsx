@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import CentralContainer from "@/components/container/central-container";
-import Image from "next/image";
 import FillButton from "@/components/buttons/fill-button";
 import BasicInput from "@/components/inputs/basic-input";
 import { isValidIrNationalCode, PhoneSchemaError, phoneUtil } from "@/common/validator/validator";
@@ -11,13 +9,12 @@ import { AppDispatch, useAppSelector } from "@/redux/store";
 import { FETCHING_STATES } from "@/types/response-type";
 import Routes from "@/common/constants/routes";
 import { toast } from "react-toastify";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { countryList } from "@/common/constants/country-list";
 import { APP_TYPE } from "@/common/constants/constants";
 import RadioGroup from "@/components/radio-group";
-import { getAppType, setAppType as setAppTypeStorage } from "@/common/utils/storage";
+import { setAppType as setAppTypeStorage } from "@/common/utils/cookie-manager";
 import OutlinedButton from "@/components/buttons/outlined-button";
-import { Router } from "next/router";
 
 const Page = () => {
   const router = useRouter();
@@ -35,7 +32,7 @@ const Page = () => {
   };
 
   useEffect(() => {
-    setAppType(getAppType());
+    setAppTypeStorage(APP_TYPE.moda);
   }, []);
 
   useEffect(() => {

@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import CentralContainer from "@/components/container/central-container";
-import Image from "next/image";
 import FillButton from "@/components/buttons/fill-button";
 import BasicInput from "@/components/inputs/basic-input";
 import { PhoneAndOtpSchemaError, phoneUtil } from "@/common/validator/validator";
@@ -15,7 +13,7 @@ import { ButtonSize } from "@/components/buttons/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { countryList } from "@/common/constants/country-list";
 import { APP_TYPE } from "@/common/constants/constants";
-import { getAppType } from "@/common/utils/storage";
+import { getAppType } from "@/common/utils/cookie-manager";
 import { verifyOtp } from "@/redux/features/auth-slice";
 
 const pad = (n: number) => {
@@ -33,8 +31,11 @@ const Page = () => {
   const authState = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    const _appType = getAppType();
-    setAppType(_appType);
+    const loadAppType = async () => {
+      const appType = await getAppType();
+      setAppType(appType);
+    };
+    loadAppType();
   }, []);
 
   useEffect(() => {

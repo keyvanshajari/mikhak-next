@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { getUserLocalStorage } from "../utils/cookie-manager";
+import { getUserLocal } from "../utils/cookie-manager";
 
 export const useIsLoggedIn = (): boolean | null => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const user = getUserLocalStorage();
-    setIsLoggedIn(user != null);
+    const getUser = async () => {
+      const user = await getUserLocal();
+      setIsLoggedIn(user != null);
+    };
+    getUser();
   }, []);
 
   return isLoggedIn;

@@ -3,7 +3,10 @@ import { FETCHING_STATES } from "@/types/response-type";
 import api from "@/common/network/api";
 import { UserModel } from "@/types/auth";
 import { ObjectStringAny } from "@/types/types";
-import { setUserLocalStorage } from "@/common/utils/cookie-manager";
+import { removeUserLocal, setUserLocal } from "@/common/utils/cookie-manager";
+import { redirect } from "next/navigation";
+import Routes from "@/common/constants/routes";
+import { replaceToEnglishNumber } from "@/common/helper/format-helper";
 
 export const fetchOtp = createAsyncThunk(
   "fetchOtp",
@@ -17,9 +20,9 @@ export const fetchOtp = createAsyncThunk(
     nationalCode?: string;
   }) => {
     const response = await api.get("/userotpreq", {
-      mobile,
       type,
-      ...(nationalCode && { nationalCode }),
+      mobile: replaceToEnglishNumber(mobile),
+      ...(nationalCode && { nationalCode: replaceToEnglishNumber(nationalCode) }),
     });
 
     return response.data;
@@ -43,14 +46,13 @@ export const verifyOtp = createAsyncThunk(
       "/userotp",
       {},
       {
-        mobile,
-
         type,
-        otpCode,
-        ...(nationalCode && { nationalCode }),
+        mobile: replaceToEnglishNumber(mobile),
+        otpCode: replaceToEnglishNumber(otpCode),
+        ...(nationalCode && { nationalCode: replaceToEnglishNumber(nationalCode) }),
       }
     );
-    return response.data;
+    return { ...(response.data as ObjectStringAny), phoneNumber: mobile };
   }
 );
 
@@ -67,7 +69,15 @@ const initialState: {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      removeUserLocal();
+      state.user = null;
+      state.getOtpState = FETCHING_STATES.IDLE;
+      state.verifyOtpState = FETCHING_STATES.IDLE;
+      redirect(Routes.loginPage);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchOtp.pending, (state) => {
@@ -90,7 +100,7 @@ const authSlice = createSlice({
         if ((payload as ObjectStringAny)["isSuccess"]) {
           state.verifyOtpState = FETCHING_STATES.READY;
           const user = payload as UserModel;
-          setUserLocalStorage({
+          setUserLocal({
             userId: user.userId,
             clinicId: user.clinicId,
             clinicName: user.clinicName,
@@ -108,6 +118,6 @@ const authSlice = createSlice({
   },
 });
 
-export const {} = authSlice.actions;
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

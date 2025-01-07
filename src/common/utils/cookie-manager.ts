@@ -1,26 +1,41 @@
 import Cookies from "js-cookie";
 import { UserModel } from "@/types/auth";
+import { APP_TYPE } from "../constants/constants";
 
 export async function getCookie(key: string): Promise<string | undefined> {
-  return Cookies.get(key);
+  const res = await Cookies.get(key);
+  console.log(res);
+
+  return res;
 }
 
 export async function setCookie(key: string, value: string) {
-  Cookies.set(key, value);
+  await Cookies.set(key, value);
 }
 
 export async function deleteCookie(key: string) {
-  Cookies.remove(key);
+  await Cookies.remove(key);
 }
 
-export const getUserLocalStorage = async (): Promise<UserModel | null> => {
-  const user = await getCookie("user");
+export const USER_COOKIE_NAME = "user";
+export const getUserLocal = async (): Promise<UserModel | null> => {
+  const user = await getCookie(USER_COOKIE_NAME);
+  console.log(user);
+
   if (user) return JSON.parse(user);
   return null;
 };
 
-export const setUserLocalStorage = (value: UserModel) => {
-  setCookie("user", JSON.stringify(value));
+export const setUserLocal = (value: UserModel) => {
+  setCookie(USER_COOKIE_NAME, JSON.stringify(value));
 };
 
-export const removeUserLocalStorage = () => deleteCookie("user");
+export const removeUserLocal = () => deleteCookie(USER_COOKIE_NAME);
+
+export const APPTYPE_COOKIE_NAME = "appType";
+
+export const setAppType = async (type: number) => await setCookie(APPTYPE_COOKIE_NAME, `${type}`);
+export const getAppType = async (): Promise<number> => {
+  const apptype = await getCookie(APPTYPE_COOKIE_NAME);
+  return parseInt(apptype ?? `${APP_TYPE.moda}`);
+};

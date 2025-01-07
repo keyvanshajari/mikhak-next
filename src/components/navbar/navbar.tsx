@@ -1,27 +1,21 @@
-"use client";
-import Link from "next/link";
-import { FiUser } from "react-icons/fi";
-import Routes from "@/common/constants/routes";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { ButtonSize } from "../buttons/button";
-import { useIsLoggedIn } from "@/common/hooks/isloggedin";
-import OutlinedButton from "../buttons/outlined-button";
-import { useAppType } from "@/common/hooks/app-type";
+import Link from "next/link";
+import Routes from "@/common/constants/routes";
+import NavProfileMenu from "../menu/profile-menu";
 import { APP_TYPE } from "@/common/constants/constants";
+import { APPTYPE_COOKIE_NAME, getAppType } from "@/common/utils/cookie-manager";
+import { cookies } from "next/headers";
 
-export default function Navbar() {
-  const router = useRouter();
-  const isLoggedIn = useIsLoggedIn();
-  const appType = useAppType();
-
+export default async function Navbar() {
+  const cookie = await cookies();
+  const appType = (await cookie.get(APPTYPE_COOKIE_NAME)?.value) ?? APP_TYPE.moda;
   return (
     <nav
       className={
         "fixed top-0 shadow-sm h-[--appbar-height] max-h-[--appbar-height] w-full z-50 bg-background-light dark:bg-background-dark flex justify-center border-b-neutral-3-light border-b px-4  md:px-2"
       }
     >
-      <div className="container flex flex-row h-full py-2 md:py-2 items-center justify-between overflow-hidden">
+      <div className="container  overflow-visible flex flex-row h-full py-2 md:py-2 items-center justify-between overflow-x-clip">
         <div className="flex flex-row items-center">
           <Link href={Routes.rootPage} passHref className={`ml-4`}>
             <Image
@@ -37,16 +31,7 @@ export default function Navbar() {
           {appType == APP_TYPE.oda && <p className="text-sm px-1 text-neutral-10-light">(پزشک)</p>}
         </div>
 
-        {isLoggedIn && (
-          <OutlinedButton
-            buttonSize={ButtonSize.large}
-            onClick={() => {
-              router.push(Routes.profile);
-            }}
-          >
-            <FiUser className="size-5 text-primary font-medium" />
-          </OutlinedButton>
-        )}
+        <NavProfileMenu />
       </div>
     </nav>
   );
