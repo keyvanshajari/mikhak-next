@@ -1,37 +1,54 @@
-import React from "react";
+import dynamic from "next/dynamic";
+import React, { ReactNode } from "react";
+import { FiX } from "react-icons/fi";
 
-const BasicModal = ({
+const Modal = dynamic(() => import("tw-elements-react").then((mod) => mod.TEModal), {
+  ssr: false,
+});
+
+function BasicModal({
+  isShow,
+  onPressClose,
+  onHide,
   children,
-  dialogId,
   title,
 }: {
-  children: React.ReactNode;
-  dialogId: string;
+  isShow: boolean;
+  onPressClose: () => void;
+  onHide: () => void;
   title: string;
-}) => {
-  const closeDialog = () => {
-    const dialog = document.getElementById(dialogId) as HTMLDialogElement;
-    if (dialog) {
-      dialog.close();
-    }
+  children: ReactNode;
+}) {
+  const _onHide = () => {
+    onHide();
+  };
+
+  const getHeader = () => {
+    return (
+      <div className="w-full inline-flex flex-row items-center justify-between p-4 border-b-2">
+        <button className="btn btn-sm btn-circle btn-ghost" onClick={onPressClose}>
+          <FiX className="text-lg text-neutral-9-light dark:text-neutral-9-dark" />
+        </button>
+        <h2 className="font-custom font-bold">{title}</h2>
+        <div className="btn btn-sm btn-circle btn-ghost"></div>
+      </div>
+    );
   };
 
   return (
-    <dialog id={dialogId} className="modal modal-bottom sm:modal-middle">
-      <div className="modal-box p-0">
-        <div className="flex flex-col justify-start items-star">
-          <div className="w-full flex flex-row items-center justify-between p-6 border-b-2">
-            <button className="btn btn-sm btn-circle btn-ghost" onClick={closeDialog}>
-              ✕
-            </button>
-            <h2 className="font-custom font-bold">{title}</h2>
-            <div className="btn btn-sm btn-circle btn-ghost"></div>
-          </div>
-          <div className="w-full py-4 px-6">{children}</div>
-        </div>
+    <Modal
+      className="z-[9999] bg-gray-500 bg-opacity-10 items-center justify-center flex"
+      show={isShow}
+      onHide={_onHide}
+    >
+      <div
+        className={"w-full inline-flex flex-col p-0 overflow-y-hidden h-full bg-background-light "}
+      >
+        {getHeader()}
+        <div className="flex flex-col py-6 px-4">{children}</div>
       </div>
-    </dialog>
+    </Modal>
   );
-};
+}
 
 export default BasicModal;

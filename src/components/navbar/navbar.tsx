@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 
 export default async function Navbar() {
   const cookie = await cookies();
-  const appType = (await cookie.get(APPTYPE_COOKIE_NAME)?.value) ?? APP_TYPE.moda;
+  const appType = parseInt((await cookie.get(APPTYPE_COOKIE_NAME)?.value) ?? `${APP_TYPE.moda}`);
   return (
     <nav
       className={
@@ -31,7 +31,7 @@ export default async function Navbar() {
           {appType == APP_TYPE.oda && <p className="text-sm px-1 text-neutral-10-light">(پزشک)</p>}
         </div>
 
-        <NavProfileMenu />
+        <NavProfileMenu appType={appType} />
       </div>
     </nav>
   );
