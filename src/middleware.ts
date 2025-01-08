@@ -4,7 +4,7 @@ import { USER_COOKIE_NAME } from "./common/utils/cookie-manager";
 import Routes from "./common/constants/routes";
 
 export default async function middleware(req: NextRequest) {
-  let response = NextResponse.next();
+  const response = NextResponse.next();
 
   const { pathname } = req.nextUrl;
   const cleanPathName = pathname.split("?")[0];

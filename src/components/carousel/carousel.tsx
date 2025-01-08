@@ -14,7 +14,7 @@ const button_styles =
 
 export default function Carousel() {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [widthWindow, _] = useWindowSize();
+  const [widthWindow] = useWindowSize();
   const [width, setWidth] = useState(0);
 
   useEffect(() => {

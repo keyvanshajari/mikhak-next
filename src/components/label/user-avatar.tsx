@@ -34,6 +34,7 @@ export default function UserAvatar({
         backgroundColor: ColorHelper.stringToColor(name),
       }}
     >
+      {imageUrl && <img src={imageUrl} />}
       {(name ?? "م").at(0)}
     </div>
   );

@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { FiUser } from "react-icons/fi";
-import { useRouter } from "next/navigation";
 import { ButtonSize } from "../buttons/button";
 import { useIsLoggedIn } from "@/common/hooks/isloggedin";
 import OutlinedButton from "../buttons/outlined-button";

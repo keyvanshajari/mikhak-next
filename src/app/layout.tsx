@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Head from "next/head";
 import { CustomToastContainer } from "@/components/toast/custom-toast";
-import Navbar from "@/components/navbar/navbar";
 import StoreProvider from "./StoreProvider";
 
 export const metadata: Metadata = {

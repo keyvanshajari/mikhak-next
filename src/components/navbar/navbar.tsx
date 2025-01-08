@@ -3,7 +3,7 @@ import Link from "next/link";
 import Routes from "@/common/constants/routes";
 import NavProfileMenu from "../menu/profile-menu";
 import { APP_TYPE } from "@/common/constants/constants";
-import { APPTYPE_COOKIE_NAME, getAppType } from "@/common/utils/cookie-manager";
+import { APPTYPE_COOKIE_NAME } from "@/common/utils/cookie-manager";
 import { cookies } from "next/headers";
 
 export default async function Navbar() {

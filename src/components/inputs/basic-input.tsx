@@ -13,7 +13,6 @@ const BasicInput: React.FC<BasicInputProps> = ({
   title,
   placeholder,
   className,
-  children,
   register,
   ...rest
 }) => {

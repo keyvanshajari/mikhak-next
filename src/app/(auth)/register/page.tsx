@@ -57,7 +57,7 @@ export default function Page() {
             inputAttributes={{
               placeholder: "۱۳۷۵/۰۴/۰۶",
             }}
-            onChange={(e) => {
+            onChange={() => {
               // field.onChange(e.value);
             }}
             inputClass={`w-full p-2 border-[1.5px] rounded-md text-start font-custom text-base  
@@ -98,7 +98,7 @@ export default function Page() {
                 value: 2,
               },
             ]}
-            onChange={(e) => {}}
+            onChange={() => {}}
             selectedValue={1}
           />
         </div>

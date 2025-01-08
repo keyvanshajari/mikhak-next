@@ -9,7 +9,7 @@ import CountryModal from "../modal/country-modal";
 
 const InputWithCountry: React.FC<
   BasicInputProps & { onChangeRegion: (code: CountryModel) => void }
-> = ({ title, placeholder, className, children, disabled, register, onChangeRegion, ...rest }) => {
+> = ({ title, placeholder, className, disabled, register, onChangeRegion, ...rest }) => {
   const [isOpenCountryModal, setIsOpenCountryModal] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<CountryModel>(countryList[0]);
 
@@ -22,7 +22,11 @@ const InputWithCountry: React.FC<
   }, [selectedCountry]);
 
   return (
-    <div className="w-full flex-col flex text-neutral-7-light dark:text-neutral-7-dark text-sm">
+    <div
+      className={
+        "w-full flex-col flex text-neutral-7-light dark:text-neutral-7-dark text-sm " + className
+      }
+    >
       {title}
       <div className="relative rounded-md dark:bg-surface-dark w-full mt-2 text-base">
         <input

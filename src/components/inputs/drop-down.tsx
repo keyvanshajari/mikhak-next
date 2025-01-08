@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";

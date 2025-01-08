@@ -9,7 +9,12 @@ function ErrorComponent({
   title?: string;
   description?: string;
 }) {
-  return <div onClick={onRetry}>{title}</div>;
+  return (
+    <div onClick={onRetry}>
+      {title}
+      {description}
+    </div>
+  );
 }
 
 export default ErrorComponent;

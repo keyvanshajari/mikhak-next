@@ -83,7 +83,7 @@ const Page = () => {
       } else {
         dispatch(fetchOtp({ mobile: phoneInput, type: appType }));
       }
-    } catch (error: any) {
+    } catch (error) {
       console.log(error);
     }
   };

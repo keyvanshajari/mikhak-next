@@ -3,8 +3,8 @@ import { ButtonSize, IButton } from "./button";
 import { Button } from "@material-tailwind/react";
 
 function BasicButton(props: IButton) {
-  var classNames = "";
-  var iconSize = "";
+  let classNames = "";
+  let iconSize = "";
 
   switch (props.buttonSize) {
     case ButtonSize.small:
@@ -34,7 +34,7 @@ function BasicButton(props: IButton) {
   }
 
   return (
-    // @ts-ignore
+    // @ts-expect-error: Button component has type issues
     <Button
       loading={props.loading}
       type={props.type}

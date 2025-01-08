@@ -1,7 +1,12 @@
-import { CategoryModel } from "@/backend/models/base";
 import { normilizeUpperText } from "@/common/helper/format-helper";
 import React, { useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+
+interface CategoryModel {
+  children: CategoryModel[];
+  name: string;
+  id: number;
+}
 
 const CollapsibleTree = ({ data }: { data: CategoryModel[] }) => {
   const renderTree = (nodes: CategoryModel[]) => {

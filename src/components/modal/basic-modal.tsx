@@ -1,4 +1,4 @@
-import React, { FormEventHandler } from "react";
+import React from "react";
 
 const BasicModal = ({
   children,

@@ -22,7 +22,7 @@ function CountryModal({
   onPressSubmit: (ct: CountryModel | null) => void;
   onHide: () => void;
 }) {
-  const [width, height] = useWindowSize();
+  const [width] = useWindowSize();
   const [countryQuery, setCountryQuery] = useState<string | null>(null);
   const [currentCountryList, setCountryList] = useState<CountryModel[]>(countryList);
 
@@ -79,7 +79,7 @@ function CountryModal({
             key={index}
             className="flex flex-row items-center border-base-300 border-b-[1px] py-6  text-xl font-medium"
             dir="ltr"
-            onClick={(_) => {
+            onClick={() => {
               onPressSubmit(e);
               onPressClose();
             }}
