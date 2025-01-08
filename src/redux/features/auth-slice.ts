@@ -70,6 +70,9 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setInitailLoginState: (state) => {
+      state.getOtpState = FETCHING_STATES.IDLE;
+    },
     logout: (state) => {
       removeUserLocal();
       state.user = null;
@@ -118,6 +121,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setInitailLoginState } = authSlice.actions;
 
 export default authSlice.reducer;

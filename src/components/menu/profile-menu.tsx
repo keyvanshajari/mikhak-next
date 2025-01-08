@@ -46,31 +46,34 @@ export default function NavProfileMenu({ appType }: { appType: number }) {
             setShowMenuModal(false);
           }}
         >
-          <section className="flex flex-row  items-center px-4 mt-2">
-            <UserAvatar name={user?.fullname} imageSize={ImageSize.large} />
-            <div className="flex flex-col items-center justify-center">
-              {user?.fullname && (
-                <p className="text-neutral-11-light font-medium text-2xl">{user?.fullname}</p>
-              )}
-              <p className="text-neutral-9-light text-xl">{user?.phoneNumber}</p>
-            </div>
-          </section>
-          <p className="text-neutral-9-light text-sm mt-2">{user?.clinicName}</p>
-          {appType == APP_TYPE.oda && (
-            <>
-              <div className="divider custom-divider bg-neutral-4-light my-2" />
-              <OutlinedButton>لیست قیمت</OutlinedButton>
-              <OutlinedButton>کلینیک</OutlinedButton>
-              <div className="divider custom-divider bg-neutral-4-light my-2" />
-            </>
-          )}
+          <div className="flex flex-col gap-y-4 px-4">
+            <section className="flex flex-row  items-center mt-2">
+              <UserAvatar name={user?.fullname} imageSize={ImageSize.large} />
+              <div className="flex flex-col items-center justify-center">
+                {user?.fullname && (
+                  <p className="text-neutral-11-light font-medium text-2xl">{user?.fullname}</p>
+                )}
+                <p className="text-neutral-9-light text-xl">{user?.phoneNumber}</p>
+              </div>
+            </section>
+            <p className="text-neutral-9-light text-xl mt-2">{user?.clinicName}</p>
+            {appType == APP_TYPE.oda && (
+              <>
+                <div className="divider custom-divider bg-neutral-4-light my-2" />
+                <OutlinedButton buttonSize={ButtonSize.large}>لیست قیمت</OutlinedButton>
+                <OutlinedButton buttonSize={ButtonSize.large}>کلینیک</OutlinedButton>
+                <div className="divider custom-divider bg-neutral-4-light my-2" />
+              </>
+            )}
 
-          <OutlinedButton
-            className="!border-error-light !text-error-light mt-8"
-            onClick={onPressLogout}
-          >
-            خروج
-          </OutlinedButton>
+            <OutlinedButton
+              className="!border-error-light !text-error-light"
+              buttonSize={ButtonSize.large}
+              onClick={onPressLogout}
+            >
+              خروج
+            </OutlinedButton>
+          </div>
         </BasicModal>
 
         <OutlinedButton

@@ -4,7 +4,7 @@ import FillButton from "@/components/buttons/fill-button";
 import BasicInput from "@/components/inputs/basic-input";
 import { isValidIrNationalCode, PhoneSchemaError, phoneUtil } from "@/common/validator/validator";
 import { useDispatch } from "react-redux";
-import { fetchOtp } from "@/redux/features/auth-slice";
+import { fetchOtp, setInitailLoginState } from "@/redux/features/auth-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { FETCHING_STATES } from "@/types/response-type";
 import Routes from "@/common/constants/routes";
@@ -42,12 +42,12 @@ const Page = () => {
   useEffect(() => {
     switch (authState.getOtpState) {
       case FETCHING_STATES.READY:
-        router.push(
+        dispatch(setInitailLoginState());
+        return router.push(
           `${Routes.verficaionPage}?mobile=${phone}${
             appType == APP_TYPE.moda ? `&nationalCode=${nationalCode}` : ""
           }`
         );
-        break;
 
       case FETCHING_STATES.FAILED:
         toast.error("خطا در دریافت کد تایید");
