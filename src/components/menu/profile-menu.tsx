@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiUser } from "react-icons/fi";
 import { ButtonSize } from "../buttons/button";
 import { useIsLoggedIn } from "@/common/hooks/isloggedin";
@@ -12,9 +12,6 @@ import { AppDispatch } from "@/redux/store";
 import { logout } from "@/redux/features/auth-slice";
 import { getUserLocal } from "@/common/utils/cookie-manager";
 import { useIsMobileSize } from "@/common/hooks/device-type";
-import dynamic from "next/dynamic";
-import { FiX } from "react-icons/fi";
-import { useWindowSize } from "@/common/hooks/resize-window";
 import BasicModal from "../modal/basic-modal";
 
 export default function NavProfileMenu({ appType }: { appType: number }) {
