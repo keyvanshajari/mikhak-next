@@ -22,9 +22,9 @@ module.exports = withMT({
         custom: ["vazir", ...fontFamily.sans],
       },
       fontSize: {
-        sm: "0.75rem",
+        xs: "0.75rem",
+        sm: "0.813rem",
         base: "0.875rem",
-        md: "0.9rem",
         xl: "1rem",
         "2xl": "1.25rem",
         "3xl": "1.563rem",

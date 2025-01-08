@@ -28,7 +28,7 @@ export function BasicDropDown<T>({
         <ListboxButton
           className={clsx(
             "border-[1.5px] focus:border-primary data-[focus]:border-primary h-11 mt-2",
-            "relative inline-flex items-center w-full rounded-md py-1.5 pl-8 pr-3 text-right text-md text-neutral-10-light",
+            "relative inline-flex items-center w-full rounded-md py-1.5 pl-8 pr-3 text-right text-base text-neutral-10-light",
             "focus:outline-none data-[focus]:outline-0 data-[focus]:-outline-offset-0 data-[focus]:outline-primary"
           )}
         >

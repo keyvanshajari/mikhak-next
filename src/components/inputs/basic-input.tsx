@@ -22,7 +22,7 @@ const BasicInput: React.FC<BasicInputProps> = ({
       {title}
       <input
         type="text"
-        className={`text-neutral-10-light dark:text-neutral-10-dark p-2 border-[1px] rounded-md font-custom mt-2 text-md
+        className={`text-neutral-10-light dark:text-neutral-10-dark p-2 border-[1px] rounded-md font-custom mt-2 text-base
           border-neutral-3-light dark:border-neutral-3-dark 
             focus:outline-none focus:ring-0 outline-0 focus:outline-0 focus:border-primary-5-light dark:focus:border-primary-5-dark
           ${className}`}

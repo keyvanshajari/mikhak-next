@@ -13,7 +13,7 @@ function BasicButton(props: IButton) {
       break;
 
     case ButtonSize.medium:
-      classNames = " h-10 rounded-md px-3 text-sm ";
+      classNames = " h-10 rounded-md px-3 text-base ";
       iconSize = "size-5";
       break;
 
@@ -28,7 +28,7 @@ function BasicButton(props: IButton) {
       break;
 
     default:
-      classNames = " h-10 rounded-md px-3 text-sm ";
+      classNames = " h-10 rounded-md px-3 text-base ";
       iconSize = "size-5";
       break;
   }

@@ -60,7 +60,7 @@ export default function Page() {
             onChange={(e) => {
               // field.onChange(e.value);
             }}
-            inputClass={`w-full p-2 border-[1.5px] rounded-md text-start font-custom text-md  
+            inputClass={`w-full p-2 border-[1.5px] rounded-md text-start font-custom text-base  
                  border-neutral-3-light dark:border-neutral-3-dark focus:border-transparent
                outline-[1.5] outline-neutral-3-light focus:outline-primary-5-light dark:focus:outline-primary-5-dark`}
           />
@@ -119,10 +119,10 @@ export default function Page() {
           renderItem={(item) => item?.name ?? ""}
         />
         <FillButton className="mt-4">ثبت نام</FillButton>
-        <p className="text-caption text-neutral-9-light text-center text-md">
+        <p className="text-caption text-neutral-9-light text-center text-base">
           آیا ثبت نام کرده اید؟
           <Link
-            className="mx-1 inline-block text-primary-4-light text-md underline"
+            className="mx-1 inline-block text-primary-4-light text-base underline"
             href={Routes.loginPage}
           >
             ورود
