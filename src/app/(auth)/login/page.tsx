@@ -15,7 +15,6 @@ import { APP_TYPE } from "@/common/constants/constants";
 import RadioGroup from "@/components/radio-group";
 import { setAppType as setAppTypeStorage } from "@/common/utils/cookie-manager";
 import OutlinedButton from "@/components/buttons/outlined-button";
-import Head from "next/head";
 
 const Page = () => {
   const router = useRouter();

@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import Head from "next/head";
-import { CustomToastContainer } from "@/components/toast/custom-toast";
 import StoreProvider from "./StoreProvider";
 
 export const metadata: Metadata = {

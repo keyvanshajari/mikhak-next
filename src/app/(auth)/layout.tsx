@@ -15,7 +15,7 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className="bg-primary">
-      <body className={`overflow-y-clip overflow-x-clip no-scrollbar h-full w-full`}>
+      <body className={`overflow-clip no-scrollbar h-full w-full`}>
         <CustomToastContainer />
         <section
           className={`bg-primary dark:bg-background-dark h-full overflow-y-auto overflow-x-clip w-full px-4`}
