@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FiUser } from "react-icons/fi";
 import { ButtonSize } from "../buttons/button";
 import { useIsLoggedIn } from "@/common/hooks/isloggedin";
@@ -12,14 +12,14 @@ import { AppDispatch } from "@/redux/store";
 import { logout } from "@/redux/features/auth-slice";
 import { getUserLocal } from "@/common/utils/cookie-manager";
 import { useIsMobileSize } from "@/common/hooks/device-type";
-import BasicModal from "../modal/basic-modal";
+import BasicModal, { IRefBasicModal } from "../modal/basic-modal";
 
 export default function NavProfileMenu({ appType }: { appType: number }) {
   const isLoggedIn = useIsLoggedIn();
   const isMobile = useIsMobileSize();
   const dispatch = useDispatch<AppDispatch>();
   const [user, setUser] = useState<UserModel | null>(null);
-  const [showMenuModal, setShowMenuModal] = useState(false);
+  const categoryRef = useRef<IRefBasicModal>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -36,16 +36,7 @@ export default function NavProfileMenu({ appType }: { appType: number }) {
   if (isMobile)
     return (
       <>
-        <BasicModal
-          isShow={showMenuModal}
-          onHide={() => {
-            setShowMenuModal(false);
-          }}
-          title="حساب کاربری"
-          onPressClose={() => {
-            setShowMenuModal(false);
-          }}
-        >
+        <BasicModal ref={categoryRef} size="full" title="حساب کاربری">
           <div className="flex flex-col gap-y-4 px-4">
             <section className="flex flex-row  items-center mt-2">
               <UserAvatar name={user?.fullname} imageSize={ImageSize.large} />
@@ -60,8 +51,12 @@ export default function NavProfileMenu({ appType }: { appType: number }) {
             {appType == APP_TYPE.oda && (
               <>
                 <div className="divider custom-divider bg-neutral-4-light my-2" />
-                <OutlinedButton buttonSize={ButtonSize.large}>لیست قیمت</OutlinedButton>
-                <OutlinedButton buttonSize={ButtonSize.large}>کلینیک</OutlinedButton>
+                <OutlinedButton key={"pricelist-btn"} buttonSize={ButtonSize.large}>
+                  لیست قیمت
+                </OutlinedButton>
+                <OutlinedButton key={"clinic-btn"} buttonSize={ButtonSize.large}>
+                  کلینیک
+                </OutlinedButton>
                 <div className="divider custom-divider bg-neutral-4-light my-2" />
               </>
             )}
@@ -79,7 +74,7 @@ export default function NavProfileMenu({ appType }: { appType: number }) {
         <OutlinedButton
           buttonSize={ButtonSize.large}
           onClick={() => {
-            setShowMenuModal(true);
+            categoryRef.current?.openModal();
           }}
         >
           <FiUser className="size-5 text-primary font-medium" />

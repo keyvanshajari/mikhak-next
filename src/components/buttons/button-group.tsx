@@ -16,7 +16,7 @@ export const CustomButtonGroup: React.FC<ButtonGroupProps> = ({
       <label className="mb-3 text-sm font-medium text-neutral-8-light dark:text-neutral-8-dark">
         {title}
       </label>
-      <div dir="ltr" className="w-full inline-flex rounded-md shadow-sm" role="group">
+      <div dir="ltr" className="w-full inline-flex rounded-md shadow-sm">
         {items.map((item, index) => (
           <button
             key={index}

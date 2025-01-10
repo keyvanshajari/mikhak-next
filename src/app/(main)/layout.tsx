@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar/navbar";
 import { CustomToastContainer } from "@/components/toast/custom-toast";
+import { CustomUIProviders } from "@/components/wrapper/next-ui-providers";
 import { Viewport } from "next";
 import Head from "next/head";
 
@@ -22,13 +23,15 @@ export default function RootLayout({
         <meta property="og:title" content="Mikhak App" />
       </Head>
       <body className={`overflow-y-hidden overflow-x-clip no-scrollbar !h-full w-full`}>
-        <section
-          className={`bg-background-light dark:bg-background-dark h-dvh overflow-y-auto overflow-x-clip  w-full`}
-        >
-          <CustomToastContainer />
-          <Navbar />
-          {children}
-        </section>
+        <CustomUIProviders>
+          <section
+            className={`bg-background-light dark:bg-background-dark h-dvh overflow-y-auto overflow-x-clip  w-full`}
+          >
+            <CustomToastContainer />
+            <Navbar />
+            {children}
+          </section>
+        </CustomUIProviders>
       </body>
     </html>
   );

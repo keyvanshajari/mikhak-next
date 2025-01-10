@@ -27,7 +27,7 @@ export default function Carousel() {
 
   return (
     <div
-      className="w-full max-w-[1920px] h-fit inline-flex items-center relative"
+      className="w-full max-w-[1920px] h-fit inline-flex items-center relative  z-0"
       ref={carouselRef}
     >
       <div

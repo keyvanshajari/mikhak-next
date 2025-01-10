@@ -1,6 +1,6 @@
 import React from "react";
 import { ButtonSize, IButton } from "./button";
-import { Button } from "@material-tailwind/react";
+import { Button } from "@nextui-org/react";
 
 function BasicButton(props: IButton) {
   let classNames = "";
@@ -13,7 +13,7 @@ function BasicButton(props: IButton) {
       break;
 
     case ButtonSize.medium:
-      classNames = " h-10 rounded-md px-3 text-base ";
+      classNames = " h-10 rounded-md px-3 text-sm ";
       iconSize = "size-5";
       break;
 
@@ -34,19 +34,18 @@ function BasicButton(props: IButton) {
   }
 
   return (
-    // @ts-expect-error: Button component has type issues
     <Button
-      loading={props.loading}
+      isLoading={props.loading}
       type={props.type}
       className={`
     ${props.className}
     ${classNames}
+    !min-w-0
     font-custom font-bold shadow-none focus:shadow-none hover:shadow-none
     line-clamp-1 focus:ring-0 ring-0
      flex items-center justify-center flex-row
     `}
       onClick={props.onClick}
-      placeholder={undefined}
       disabled={props.disabled}
     >
       {props.PreffixIcon != null ? (

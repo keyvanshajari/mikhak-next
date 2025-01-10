@@ -1,54 +1,92 @@
-import dynamic from "next/dynamic";
-import React, { ReactNode } from "react";
+"use client";
+import React, { forwardRef, useImperativeHandle } from "react";
+import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/modal";
 import { FiX } from "react-icons/fi";
 
-const Modal = dynamic(() => import("tw-elements-react").then((mod) => mod.TEModal), {
-  ssr: false,
-});
+export interface IRefBasicModal {
+  openModal: () => void;
+  closeModal: () => void;
+}
 
-function BasicModal({
-  isShow,
-  onPressClose,
-  onHide,
-  children,
-  title,
-}: {
-  isShow: boolean;
-  onPressClose: () => void;
-  onHide: () => void;
+export interface IbasicModal {
+  children: React.ReactNode;
+  size?: "sm" | "md" | "lg" | "xl" | "2xl" | "full" | "xs" | "3xl" | "4xl" | "5xl" | undefined;
   title: string;
-  children: ReactNode;
-}) {
-  const _onHide = () => {
-    onHide();
-  };
+  onHide?: () => void;
+}
 
-  const getHeader = () => {
+const BasicModal = forwardRef<IRefBasicModal, IbasicModal>(({ children, size, title }, ref) => {
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+
+  useImperativeHandle(ref, () => ({
+    openModal: () => {
+      onOpen();
+    },
+    closeModal: () => {
+      onClose();
+    },
+  }));
+
+  const getHeader = ({ onPressClose }: { onPressClose: () => void }) => {
     return (
-      <div className="w-full inline-flex flex-row items-center justify-between p-4 border-b-2">
+      <ModalHeader className="w-full inline-flex flex-row items-center justify-between p-6 border-b-2 h-[--appbar-height]">
         <button className="btn btn-sm btn-circle btn-ghost" onClick={onPressClose}>
           <FiX className="text-lg text-neutral-9-light dark:text-neutral-9-dark" />
         </button>
         <h2 className="font-custom font-bold">{title}</h2>
-        <div className="btn btn-sm btn-circle btn-ghost"></div>
-      </div>
+        <button className="btn btn-sm btn-circle btn-ghost" onClick={() => {}}></button>
+      </ModalHeader>
     );
   };
 
+  const getBody = () => {
+    return <ModalBody className="inline-flex flex-col">{children}</ModalBody>;
+  };
   return (
     <Modal
-      className="z-[9999] bg-gray-500 bg-opacity-10 items-center justify-center flex"
-      show={isShow}
-      onHide={_onHide}
+      className=" bg-background-light dark:bg-background-dark items-center justify-center inline-flex"
+      isOpen={isOpen}
+      closeButton={<div></div>}
+      size={size}
+      motionProps={{
+        variants: {
+          enter: {
+            y: 0,
+            x: 0,
+            opacity: 1,
+            transition: {
+              duration: 0.2,
+              ease: "linear",
+            },
+          },
+          exit: {
+            y: -20,
+            x: 0,
+            opacity: 0,
+            transition: {
+              duration: 0.2,
+              ease: "easeOut",
+            },
+          },
+        },
+      }}
+      onOpenChange={onOpenChange}
     >
-      <div
-        className={"w-full inline-flex flex-col p-0 overflow-y-hidden h-full bg-background-light "}
-      >
-        {getHeader()}
-        <div className="flex flex-col py-6 px-4">{children}</div>
-      </div>
+      <ModalContent>
+        {(onClose) => (
+          <>
+            <div className="h-full w-full inline-flex flex-col overflow-y-hidden">
+              {getHeader({ onPressClose: onClose })}
+              <div className="flex flex-1 w-full flex-col overflow-scroll no-scrollbar">
+                {getBody()}
+              </div>
+            </div>
+          </>
+        )}
+      </ModalContent>
     </Modal>
   );
-}
+});
 
+BasicModal.displayName = "BasicModal";
 export default BasicModal;

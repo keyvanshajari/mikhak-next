@@ -1,14 +1,15 @@
 import { fontFamily } from "tailwindcss/defaultTheme";
 import MyCustomColors from "./colors";
-import withMT from "@material-tailwind/react/utils/withMT";
+import { nextui } from "@nextui-org/react";
 
-module.exports = withMT({
+module.exports = {
   darkMode: ["selector", '[data-mode="dark"]'],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/frontend/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -45,7 +46,8 @@ module.exports = withMT({
       },
     },
   },
-  plugins: [require("daisyui"), require("tailwind-scrollbar")],
+  plugins: [require("daisyui"), require("tailwind-scrollbar"), nextui()],
+
   variants: {
     scrollbar: ["rounded"],
   },
@@ -67,4 +69,4 @@ module.exports = withMT({
     logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
     themeRoot: ":root", // The element that receives theme color CSS variables
   },
-});
+};

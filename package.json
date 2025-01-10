@@ -12,11 +12,15 @@
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@material-tailwind/react": "^2.1.10",
+    "@nextui-org/react": "^2.6.11",
+    "@nextui-org/system": "^2.4.6",
+    "@nextui-org/theme": "^2.4.5",
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
     "client-only": "^0.0.1",
     "cookies": "^0.9.1",
+    "framer-motion": "^11.16.4",
     "google-libphonenumber": "^3.2.40",
     "inversify": "^6.2.1",
     "joi": "^17.13.3",
@@ -35,7 +39,6 @@
     "reflect-metadata": "^0.2.2",
     "server-only": "^0.0.1",
     "swiper": "^11.2.0",
-    "tw-elements-react": "^1.0.0-alpha-end",
     "zaman": "^2.1.1"
   },
   "devDependencies": {
