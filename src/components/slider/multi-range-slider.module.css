@@ -1,0 +1,42 @@
+.rangeInput {
+  position: absolute;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+}
+
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #3251fc;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.rangeInput::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #3251fc;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.rangeInput.minRange {
+  z-index: 2;
+}
+
+.rangeInput.maxRange {
+  z-index: 1;
+}
+
+.values {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
